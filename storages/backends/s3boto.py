@@ -1,6 +1,7 @@
 import os
 import mimetypes
 
+from io import BytesIO
 try:
     from io import StringIO
 except ImportError:
@@ -397,7 +398,7 @@ class S3BotoStorageFile(File):
 
     def _get_file(self):
         if self._file is None:
-            self._file = StringIO()
+            self._file = BytesIO()
             if 'r' in self._mode:
                 self._is_dirty = False
                 self.key.get_contents_to_file(self._file)
